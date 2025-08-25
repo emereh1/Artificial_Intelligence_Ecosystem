@@ -6,6 +6,7 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
+import os
 
 # Load pre-trained MobileNetV2
 model = MobileNetV2(weights="imagenet")
@@ -37,27 +38,27 @@ def get_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None)
 
     return heatmap
 
-def show_gradcam(image_path, heatmap, alpha=0.4):
+def save_gradcam(image_path, heatmap, alpha=0.4):
     img = cv2.imread(image_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     heatmap = cv2.resize(heatmap, (img.shape[1], img.shape[0]))
     heatmap = np.uint8(255 * heatmap)
-
     heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
+
     superimposed_img = cv2.addWeighted(img, 1-alpha, heatmap, alpha, 0)
 
-    plt.figure(figsize=(10,5))
-    plt.subplot(1,2,1)
-    plt.imshow(img)
-    plt.title("Original Image")
-    plt.axis("off")
+    # derive output filename
+    base, ext = os.path.splitext(image_path)
+    output_file = f"{base}_gradcam{ext}"
 
-    plt.subplot(1,2,2)
+    # save using matplotlib
     plt.imshow(superimposed_img)
-    plt.title("Grad-CAM")
-    plt.axis("off")
-    plt.show()
+    plt.axis('off')
+    plt.savefig(output_file, bbox_inches='tight', pad_inches=0)
+    plt.close()
+
+    print(f"Grad-CAM saved as '{output_file}'")
 
 def classify_image(image_path):
     try:
@@ -75,7 +76,7 @@ def classify_image(image_path):
 
         # Grad-CAM visualization for top prediction
         heatmap = get_gradcam_heatmap(img_array, model, last_conv_layer_name="Conv_1")
-        show_gradcam(image_path, heatmap)
+        save_gradcam(image_path, heatmap)
 
     except Exception as e:
         print(f"Error processing '{image_path}': {e}")
@@ -87,4 +88,7 @@ if __name__ == "__main__":
         if image_path.lower() == "exit":
             print("Goodbye!")
             break
+        if not os.path.isfile(image_path):
+            print(f"File not found: {image_path}")
+            continue
         classify_image(image_path)

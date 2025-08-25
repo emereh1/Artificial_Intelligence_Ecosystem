@@ -7,7 +7,6 @@ def apply_blur_filter(image_path, output_path="blurred_image.png"):
         img = Image.open(image_path)
         img_resized = img.resize((128, 128))
         img_blurred = img_resized.filter(ImageFilter.GaussianBlur(radius=2))
-
         plt.imshow(img_blurred)
         plt.axis('off')
         plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
