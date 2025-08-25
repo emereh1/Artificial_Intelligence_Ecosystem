@@ -5,7 +5,8 @@ This project is designed to give you hands-on experience working with an image c
 Final Report – Image Classification and Filter Project
 Name: Emere Hoehne
 Project: Image Classification & Creative Filters
-GitHub Repo: [Insert your repo link here]
+GitHub Repo: https://github.com/emereh1/Artificial_Intelligence_Ecosystem/tree/main/Image_Classification
+Alternative Location: In ReadMe project file
 ________________________________________
 Part 1: Base Classifier and Grad-CAM Analysis
 Classifier Overview:
@@ -45,4 +46,4 @@ Reflection on AI Assistance:
 AI guidance was valuable in understanding image processing and modifying filters. It suggested methods for resizing, color adjustments, and looping through images, which helped me iterate quickly. The collaboration highlighted how AI can accelerate experimentation and learning, while still requiring human judgment for creative decisions.
 ________________________________________
 Summary:
-This project provided hands-on experience with image classification, Grad-CAM interpretability, and creative filtering in Python. I gained insight into how CNNs can be influenced by background features, how heatmaps reveal model focus, and how image processing techniques can be creatively applied. The experience also reinforced the value of AI assistance in explaining code, implementing features, and iterating on artistic ideas.
+This project provided hands-on experience with image classification, Grad-CAM interpretability, and creative filtering in Python. I gained insight into how CNNs can be influenced by background features, how heatmaps reveal model focus, and how image processing techniques can be creatively applied. The experience also reinforced the value of AI assistance in explaining code, implementing features, and iterating on artistic
